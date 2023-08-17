@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	타임리프 뷰
+	
+	<button id="getData">겟방식</button>
+	<button id="getJSON">포스트방식</button>
+	
+	<br/>
+	<button id="getTest">get실습</button>
+	<button id="postTest">post실습</button>
+	
+	<script>
+		
+		let getData = document.getElementById("getData");
+		getData.onclick = () => {
+					
+		fetch("/getData?sno=1&first=홍길동")
+		.then( response => response.json() )
+		.then( t => console.log(t) );
+		
+		}
+		
+		
+		//////////////////
+		
+		
+		let getJSON = document.getElementById("getJSON");
+		getJSON.onclick = () => {
+			
+			fetch("/getJSON", {
+				method : "post",
+				headers : {
+					"Content-Type" : "application/json"
+				},
+				body : JSON.stringify({ "sno" : "1", "first" : "홍길동", "last" : "이순신" })
+			})
+			.then( response => response.json() )
+			.then( t => console.log(t) )
+			
+		}
+		
+		
+		/////////////////////
+		//실습
+		
+		let getTest = document.getElementById("getTest")
+		getTest.onclick = () => {
+			
+			fetch("/api/v1/getData?num=29&name=손가영")
+			.then( response => response.json() )
+			.then( t => console.log(t) )
+		}
+		
+		
+		let postTest = document.getElementById("postTest");
+		postTest.onclick = () => {
+			
+			fetch("/api/v1/getInfo", {
+				method: "post",
+				headers : {
+					"Content-Type" : "application/json"
+				},
+				body : JSON.stringify({"num" : "20", "name" : "손가영"})
+			})
+			.then( response => response.json() )
+			.then( t => console.log(t) )
+			
+		}
+		
+		
+		
+	</script>
+	
+</body>
+</html>
